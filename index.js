@@ -1,7 +1,15 @@
-const dotenv = require('dotenv')
-dotenv.config()
+// const dotenv = require('dotenv')
+// dotenv.config()
 
-const mongodb_connection = require('./mongobd_con')
+// const mongodb_connection = require('./mongobd_con')
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const DATABASE_USER = codigos;
+const DATABASE_PASSWORD = codigos;
+const DATABASE_NAME = qrcodes;
+const URL = `mongodb+srv://${DATABASE_USER}:${DATABASE_PASSWORD}@qrcodes.5p5a9.mongodb.net/${DATABASE_NAME}?retryWrites=true&w=majority`;
+
+const mongodb_connection = new MongoClient(URL, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+
 const express = require('express')
 var cors = require('cors')
 const bodyParser = require('body-parser')
@@ -102,4 +110,4 @@ app.delete('/:codigo', function (req, res) {
 });
 
 app.listen(process.env.PORT || 3000, 
-	() => console.log("Server is running..."));
+	() => console.log("Server is running...", process.env.PORT || 3000));
